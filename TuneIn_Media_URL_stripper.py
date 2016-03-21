@@ -32,7 +32,7 @@ def getURL():
     #print "The API key is: " + API_key[0];
     #print "The API key is " + API_key[0] + ".";
     try:
-        use_key = urllib2.urlopen(str(API_key[0]));
+        use_key = urllib2.urlopen("http:" + str(API_key[0]));
     except ValueError:
         print "I can't find stream URLs from stations where TuneIn wants to launch an external player because TuneIn doesn't know the URL, so how could I ask them what it is? Sorry. Try another station."
         getURL();
@@ -43,11 +43,8 @@ def getURL():
     Desc_ = desc_[1].split("\" />")
     Description = Desc_[0]
     genre_ = raw_file.split("itemprop=\"genre\" content=\"")
-    try:
-        Genre_ = genre_[1].split("\"/>")
-        Genre = Genre_[0]
-    except IndexError:
-        Genre = "Unknown"
+    Genre_ = genre_[1].split("\"/>")
+    Genre = Genre_[0]
     key_content = use_key.read();
     raw_stream_url = re.findall(r"Url\": \"(.*?)\"", key_content);
     bandwidth = re.findall(r"Bandwidth\":(.*?),", key_content);
