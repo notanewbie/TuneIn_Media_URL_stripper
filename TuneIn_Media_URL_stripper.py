@@ -36,6 +36,9 @@ def getURL():
     except ValueError:
         print "I can't find stream URLs from stations where TuneIn wants to launch an external player because TuneIn doesn't know the URL, so how could I ask them what it is? Sorry. Try another station."
         getURL();
+    except urllib2.URLError:
+        print "This stream doesn't seem to have a stream URL to it. Please try another channel."
+        getURL();
     logo_ = raw_file.split("http://cdn-radiotime-logos")
     logo = logo_[1].split("\"")
     Logo = "http://cdn-radiotime-logos" + logo[0];
