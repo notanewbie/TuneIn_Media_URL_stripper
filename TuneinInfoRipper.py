@@ -7,7 +7,23 @@ def getURL():
     open_file = urllib2.urlopen(url1);
     raw_file = open_file.read();
     cut = raw_file.split("<label>AVAILABLE STREAMS</label>")
-    Part = cut[1].split("</li>")
+    try:
+        Part = cut[1].split("</li>")
+    except IndexError:
+        print "Stream URL unavailable."
+        getURL()
+    logo_ = raw_file.split("http://cdn-radiotime-logos")
+    logo = logo_[1].split("\"")
+    Logo = "http://cdn-radiotime-logos" + logo[0];
+    desc_ = raw_file.split("description\" content=\"")
+    Desc_ = desc_[1].split("\" />")
+    Description = Desc_[0]
+    genre_ = raw_file.split("itemprop=\"genre\" content=\"")
+    Genre_ = genre_[1].split("\"/>")
+    Genre = Genre_[0]
+    print "Logo: " + Logo
+    print "Description: " + Description
+    print "Genre: " + Genre
     #print "Part[0]:"
     #print Part[0];
     i = 0;
